@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InFo VuDinhTu</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -103,6 +102,14 @@
             width: 100%;
             border-radius: 10px;
             margin-bottom: 20px;
+            cursor: pointer;
+            /* Thêm cursor pointer */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .smart-card img.profile.clicked {
+            transform: scale(1.05);
+            /* Áp dụng hiệu ứng khi click */
         }
 
         .smart-card a {
@@ -169,7 +176,7 @@
 <body>
     <canvas id="background"></canvas>
     <div class="smart-card">
-        <img src="IMG_6983.JPG"" alt="Ảnh đại diện" class="profile">
+        <img src="/IMG_6983.JPG" alt="Ảnh đại diện" class="profile" id="profile-image">
         <h1>Connect With Me</h1>
         <a href="https://www.facebook.com/tuquaivatt" class="facebook" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
@@ -191,12 +198,16 @@
             <img src="./logo-tiktok.svg" alt="Logo TikTok"> TikTok
         </a>
     </div>
-    <audio autoplay loop>
+    <audio id="background-audio" loop>
         <source src="/videoplayback-_1_.mp3" type="audio/mpeg">
     </audio>
+
     <script>
         const canvas = document.getElementById('background');
         const ctx = canvas.getContext('2d');
+        const audio = document.getElementById('background-audio');
+        const profileImage = document.getElementById('profile-image');
+
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -231,6 +242,12 @@
             requestAnimationFrame(animate);
         }
         animate();
+
+        // Play audio and apply hover effect on click
+        profileImage.addEventListener('click', function () {
+            audio.play(); // Bắt đầu phát nhạc khi click
+            profileImage.classList.add('clicked'); // Thêm lớp để áp dụng hiệu ứng hover
+        });
     </script>
 </body>
 
